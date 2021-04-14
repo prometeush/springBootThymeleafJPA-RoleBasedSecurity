@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thmeleaf.org/thmeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+     <div th:replace="fragments :: menu"></div>
+        <div class="container-fluid">
+          <div class="row mt-3 mb-4 text-center justify-content-center">
+             <div class="col-8 mb-4">
+                  <table class="table">
+                      <tr>
+                          <th>Id</th>
+                          <th>Vorname</th>
+                          <th>Nachname</th>
+                          <th>Email</th>
+                          <th>Prog_Sprache</th>
+                          <th>Anfang</th>
+                          <th>Gender</th> 
+                          <th sec:authorize="hasAnyAuthority('ADMIN','EDITOR')" colspan="2">Action</th>    
+                      </tr>
+                      
+                      <tr th:each="mitarbeiter :${mitarbeit}">
+                         <td th:text="${mitarbeiter.id}"></td>
+                         <td th:text="${mitarbeiter.vorname}"></td>
+                         <td th:text="${mitarbeiter.nachname}"></td>
+                         <td th:text="${mitarbeiter.email}"></td>
+                         <td th:text="${mitarbeiter.anfang}"></td>
+                         <td th:text="${mitarbeiter.progSprache}"></td>
+                         <td th:text="${mitarbeiter.gender}"></td>
+                         <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')"><a th:href="@{'/delete/'+${mitarbeiter.id}}" class="btn btn-danger">Delete</a></td>
+                         <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')"><a th:href="@{'/update/'+${mitarbeiter.id}}" class="btn btn-danger">Update</a></td>
+                      </tr>
+                  </table>
+             </div>
+          </div>
+      </div>
+     <div th:replace="fragments :: footer"></div>
+</body>
+</html>

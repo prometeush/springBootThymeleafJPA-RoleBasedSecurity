@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+     <div th:replace="fragments :: menu"></div>
+        <div class="container-fluid">
+          <div class="row text-center mt-4 justify-content-center">
+             <div class="col-8">
+                 <form th:action="@{/mitarbeiterSave}" th:object="${mitarbeitermodel}" method="post">
+                 
+                    <div class="form-group row">
+                      
+                       <input type="hidden" class="form-control col-5" th:field="*{id}">
+                    </div>
+                 
+                    <div class="form-group row">
+                       <label class="col-form-label col-2">Vorname</label>
+                       <input type="text" class="form-control col-5" th:field="*{vorname}">
+                    </div>
+                    
+                     <div class="form-group row">
+                       <label class="col-form-label col-2">Nachname</label>
+                       <input type="text" class="form-control col-5" th:field="*{nachname}">
+                    </div>
+                    
+                     <div class="form-group row">
+                       <label class="col-form-label col-2">Email</label>
+                       <input type="email" class="form-control col-5" th:field="*{email}">
+                    </div>
+                    
+                     <div class="form-group row">
+                       <label class="col-form-label col-2">Prog_Sprache</label>
+                       <select class="custom-select col-5" th:field="*{progSprache}">
+                         <option th:each="prog :${listprog}" th:value="${prog}" th:text="${prog}">
+                       </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                       <label class="col-form-label col-2">Anfang</label>
+                       <input type="date" class="form-control col-5" th:field="*{anfang}">
+                    </div>
+                    
+                      <div class="form-group row">
+                           <label class="custom-form-label col-2">Gender</label>
+	                       <div class="col-5">
+	                           <div class="custom-control custom-radio custom-control-inline">
+	                           <input type="radio" id="radio1"  name="radios" class="custom-control-input" th:value="Frau" th:field="*{gender}">
+	                           <label for="radio1" class="custom-control-label">Frau</label>
+	                           </div>
+	                           
+	                           <div class="custom-control custom-radio custom-control-inline">
+	                           <input type="radio" id="radio2"  name="radios" class="custom-control-input" th:value="Herr" th:field="*{gender}">
+	                           <label for="radio2" class="custom-control-label">Herr</label>
+	                           </div>
+	                       </div>                      
+                      </div>
+                    
+                      <div class="form-group row">
+                       <label class="col-form-label col-2"></label>
+                       <button type="submit" class="btn btn-success col-5">Anmelden</button>
+                    </div>
+                    
+                 </form>
+             </div>
+          </div>
+      </div>
+     <div th:replace="fragments :: footer"></div>
+</body>
+</html>
